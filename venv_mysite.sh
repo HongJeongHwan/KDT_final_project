@@ -1,4 +1,4 @@
 echo 'mysite venv start'
 cd ~/venvs/mysite/bin
 . activate
-cd ~/projects/mysite
+cd ~/projects/mysitels -l
