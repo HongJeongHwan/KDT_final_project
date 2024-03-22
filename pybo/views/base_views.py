@@ -5,6 +5,7 @@ from ..models import Question
 
 # Create your views here.
 def index(request):
+    3/0
     # 입력인자
     page = request.GET.get('page', 1)
     kw = request.GET.get('kw', '')
