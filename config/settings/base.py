@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-%o@)pwo1-%+_*n#880)xp(sf32*5$h_#-epaf=waq0r$liur^n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.85']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -77,13 +77,27 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
+    'default': { 
+        'ENGINE': 'django.db.backends.mysql', # mysql 엔진 설정 
+        'NAME':'yolo', # 데이터베이스 이름 
+        'USER':'root', # 데이터베이스 연결시 사용할 유저 이름 
+        'PASSWORD':'1234', # 유저 패스워드 
+        'HOST':'localhost', 
+        'PORT':'3306', 
+    },
+    'sqlite3': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

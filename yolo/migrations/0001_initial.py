@@ -15,43 +15,45 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Answer',
+            name='YAnswer',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField()),
+                ('imgfile', models.ImageField(blank=True, null=True, upload_to='')),
                 ('create_date', models.DateTimeField()),
                 ('modify_date', models.DateTimeField(blank=True, null=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='author_answer', to=settings.AUTH_USER_MODEL)),
-                ('voter', models.ManyToManyField(related_name='voter_answer', to=settings.AUTH_USER_MODEL)),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='author_answer_yolo', to=settings.AUTH_USER_MODEL)),
+                ('voter', models.ManyToManyField(related_name='voter_answer_yolo', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
-            name='Question',
+            name='YQuestion',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('subject', models.CharField(max_length=200)),
                 ('content', models.TextField()),
+                ('imgfile', models.ImageField(blank=True, null=True, upload_to='yolo/question/%Y%m%d')),
                 ('create_date', models.DateTimeField()),
                 ('modify_date', models.DateTimeField(blank=True, null=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='author_question', to=settings.AUTH_USER_MODEL)),
-                ('voter', models.ManyToManyField(related_name='voter_question', to=settings.AUTH_USER_MODEL)),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='author_question_yolo', to=settings.AUTH_USER_MODEL)),
+                ('voter', models.ManyToManyField(related_name='voter_question_yolo', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
-            name='Comment',
+            name='YComment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField()),
                 ('create_date', models.DateTimeField()),
                 ('modify_date', models.DateTimeField(blank=True, null=True)),
-                ('answer', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='pybo.answer')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('question', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='pybo.question')),
+                ('answer', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='yolo.yanswer')),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='voter_comment_yolo', to=settings.AUTH_USER_MODEL)),
+                ('question', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='yolo.yquestion')),
             ],
         ),
         migrations.AddField(
-            model_name='answer',
+            model_name='yanswer',
             name='question',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pybo.question'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='yolo.yquestion'),
         ),
     ]
